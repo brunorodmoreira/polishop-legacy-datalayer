@@ -12,10 +12,9 @@
   "dependencies": {
     "vtex.pixel-interfaces": "1.x"
   },
-  "peerDependencies": {
-    "vtex.google-tag-manager": "2.x"
-  },
-  "registries": ["smartcheckout"],
+  "registries": [
+    "smartcheckout"
+  ],
   "policies": [],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
