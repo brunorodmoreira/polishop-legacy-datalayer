@@ -13,7 +13,7 @@ export function getProductData(data: ProductViewData) {
     name: productName,
     variant: selectedSku.name,
     brand,
-    categories,
+    categories: categories[0],
     categoryIds: categoryTree.map((value) => value.id),
     imageUrl: selectedSku.imageUrl,
     available: selectedSku.sellers?.[0].commertialOffer.AvailableQuantity > 0,
