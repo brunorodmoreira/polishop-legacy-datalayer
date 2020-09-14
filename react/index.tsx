@@ -2,12 +2,13 @@ import { canUseDOM } from 'vtex.render-runtime'
 
 import push from './modules/push'
 import { getProductData } from './modules/product'
+import { getHitData } from './modules/hit'
 
 export default function () {
   return null
 } // no-op for extension point
 
-export function handleLegacyEvents(e: PixelMessage) {
+export function handleEvents(e: PixelMessage) {
   let data
 
   switch (e.data.eventName) {
@@ -22,11 +23,11 @@ export function handleLegacyEvents(e: PixelMessage) {
 
   push({
     event: 'legacy:productDetail',
-    transactionDate: new Date().getTime(),
+    ...getHitData(),
     ecommerce: { details: { products: [{ ...data }] } },
   })
 }
 
 if (canUseDOM) {
-  window.addEventListener('message', handleLegacyEvents)
+  window.addEventListener('message', handleEvents)
 }
