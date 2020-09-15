@@ -1,7 +1,11 @@
 import { canUseDOM } from 'vtex.render-runtime'
 
 import push from './modules/push'
-import { getAddToCartData, getProductData } from './modules/product'
+import {
+  getAddToCartData,
+  getProductData,
+  getProductImpressionData,
+} from './modules/product'
 import { getHitData } from './modules/hit'
 
 export default function () {
@@ -31,6 +35,17 @@ export function handleEvents(e: PixelMessage) {
           add: {
             ...getAddToCartData(e.data),
           },
+        },
+      }
+
+      break
+    }
+
+    case 'vtex:productImpression': {
+      data = {
+        event: 'legacy:productImpression',
+        ecommerce: {
+          ...getProductImpressionData(e.data),
         },
       }
 

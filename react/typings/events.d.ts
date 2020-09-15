@@ -3,19 +3,9 @@
 interface PixelMessage extends MessageEvent {
   data:
     | ProductViewData
-    | ProductClickData
-    | OrderPlacedData
-    | OrderPlacedTrackedData
-    | PageViewData
     | ProductImpressionData
     | AddToCartData
     | RemoveToCartData
-    | CartChangedData
-    | HomePageInfo
-    | ProductPageInfoData
-    | SearchPageInfoData
-    | UserData
-    | CartIdData
 }
 
 interface EventData {
@@ -78,6 +68,7 @@ interface ItemSummary {
   referenceId: { Key: string; Value: string }
   seller: Seller
   sellers: Seller[]
+  image: { imageUrl: string }
 }
 
 interface Seller {
@@ -116,4 +107,13 @@ interface CartItem {
   quantity: number
   skuId: string
   variant: string
+}
+
+interface ProductImpressionData extends EventData {
+  event: 'productImpression'
+  eventName: 'vtex:productImpression'
+  impressions: Impression[]
+  product?: ProductSummary // deprecated, use impressions list!
+  position?: number // deprecated, use impressions list!
+  list: string
 }
