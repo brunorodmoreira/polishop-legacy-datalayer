@@ -15,7 +15,7 @@ export function getProductData(data: ProductViewData) {
     name: productName,
     variant: selectedSku.name,
     brand,
-    categories: categories[0],
+    category: categories[0],
     categoryIds: getCategoryIds(categoryTree),
     imageUrl: selectedSku.imageUrl,
     available: getAvailability(commertialOffer),
