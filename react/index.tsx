@@ -1,7 +1,7 @@
 import { canUseDOM } from 'vtex.render-runtime'
 
 import push from './modules/push'
-import { getProductData } from './modules/product'
+import { getAddToCartData, getProductData } from './modules/product'
 import { getHitData } from './modules/hit'
 
 export default function () {
@@ -13,7 +13,27 @@ export function handleEvents(e: PixelMessage) {
 
   switch (e.data.eventName) {
     case 'vtex:productView': {
-      data = { ...getProductData(e.data) }
+      data = {
+        event: 'legacy:productDetail',
+        ecommerce: {
+          details: {
+            products: [{ ...getProductData(e.data) }],
+          },
+        },
+      }
+      break
+    }
+
+    case 'vtex:addToCart': {
+      data = {
+        event: 'legacy:addToCart',
+        ecommerce: {
+          add: {
+            ...getAddToCartData(e.data),
+          },
+        },
+      }
+
       break
     }
 
@@ -22,9 +42,8 @@ export function handleEvents(e: PixelMessage) {
   }
 
   push({
-    event: 'legacy:productDetail',
     ...getHitData(),
-    ecommerce: { details: { products: [{ ...data }] } },
+    ...data,
   })
 }
 

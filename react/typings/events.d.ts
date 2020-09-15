@@ -90,3 +90,30 @@ interface CommertialOffer {
   ListPrice: number
   AvailableQuantity: number
 }
+
+interface AddToCartData extends EventData {
+  event: 'addToCart'
+  eventName: 'vtex:addToCart'
+  items: CartItem[]
+}
+
+interface RemoveToCartData extends EventData {
+  event: 'removeFromCart'
+  eventName: 'vtex:removeFromCart'
+  items: CartItem[]
+}
+
+interface CartItem {
+  brand: string
+  ean: string
+  category: string
+  detailUrl: string
+  imageUrl: string
+  name: string
+  price: number
+  productId: string
+  productRefId: string
+  quantity: number
+  skuId: string
+  variant: string
+}
